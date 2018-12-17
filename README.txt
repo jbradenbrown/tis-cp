@@ -1,3 +1,5 @@
+github.com/jbradenbrown/tis-cp
+
 The easiest way to use my project is through the cli that I've built. This is accessible by creating a virtual environment (not required, but recommended), and installing with pip while in the directory containing setup.py:
     pip install -e .
 
