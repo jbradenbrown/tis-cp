@@ -1,0 +1,13 @@
+At the core of this project is a learned nlp model for tagging companies, figures, and countries. The model was created using Prodigy, a tool which is built on top of spacy to make data labeling as painless as possible. Transfer learning was used with the spacy en_core_web_sm model as the starting point. I wasn't able to improve the model beyond 70% accuracy, which doesn't seem great, but I feel it still provides an interesting proof of concept. Poor labeling on my part may be partially to blame for the inability to achieve a higher accuracy.
+The training set for the model consisted of 1700 hand labeled examples that came from a subset of the articles.json file that is included, which was scraped from several news sources over a period of about a month. The model was trained for 15 iterations, with a dropout of .2 and a batch size of 32.
+The remainder of the project is a scaffolding built around the model to enable it to build a knowledge graph out of the tags that it collects from the article corpus and spit out interesting results. The knowledge graph is built with networkx and consists of tags as nodes with attributes to log how often the entity is tagged as a company, figure, or country, and edges, which are created by linking tags that appear in the same article together, weighted for each article that connects them. This is then used with a heuristic (for nodes a and b, weight([a,b]) / count(tagged(a)) * 1/(1+log(1.5*len(neighbors(b)))) ) to predict similarity.
+The similarity can then be used to suggest articles that are related to the original article.
+The larger scope goal for the project is to create a knowledge graph that could be used in financial applications to identify non obvious connections between companies, which can assist in managing risk.
+
+Technologies Used:
+Prodigy
+Spacy
+NetworkX
+Click
+Dill
+Python
